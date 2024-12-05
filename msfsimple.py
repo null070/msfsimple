@@ -4,6 +4,18 @@ import webbrowser
 
 def exibir_aviso():
     input("ATENÇÃO: Não use para fins maliciosos. Eu, como autor, não me responsabilizo. Pressione Enter para continuar.")
+    input("""
+                ___
+              //   \ 
+             ||Enter|
+               \___/      
+                ||
+            ----||------------
+            | | || | | | | |
+            ------------------
+            
+               
+          """)
     os.system("clear")
 
 def msfconsole_simples():
@@ -41,12 +53,17 @@ def msfconsole_simples():
 
 def instalar_ferramentas():
     while True:
-        print("""\
+        print("""
+                |\     /|
+                 \/---\/         
+                 /<> <>\ 
+                |  IDF  | 
+                 \_____/
         =============================
-          INSTALAÇÃO DE FERRAMENTAS
+          /\/\/\/\/\/\/\/\/\/\/\ 
         =============================
         1 - Atualizar pacotes
-        2 - Atualizar sistema
+        2 - Atualizar sistema        
         3 - Atualização completa
         4 - Instalar Metasploit
         5 - Instalar Hydra
@@ -75,20 +92,20 @@ def instalar_ferramentas():
 
 def ajuda():
     print("""\
-    ============================
-              AJUDA
-    ============================
-    1. msfconsole-simples: Configura exploits no Metasploit.
-    2. Instalar ferramentas: Instala pacotes essenciais.
-    3. Ajuda: Exibe este menu.
-    4. Sair: Encerra o programa.
-    ============================
+    
+        --/-/--/-/-/-/-/-/-/[ajuda]/---/--/-/-/-/-/-/-/-/
+   |/////////////////////////////////////////////////////////////
+   |1. msfconsole-simples: Configura exploits no Metasploit.  //
+   |2. Instalar ferramentas: Instala pacotes essenciais.     //
+   |3. Ajuda: Exibe este menu.    //////////////////////////// 
+   |4. Sair: Encerra o programa. /
+   |/////////////////////////////
     """)
     input("Pressione Enter para voltar ao menu principal.")
 
 def opcoes_avancadas():
     while True:
-        print("""\
+        print("""
         =======================
              OPÇÕES AVANÇADAS
         =======================
@@ -122,12 +139,14 @@ def apoiar_criador():
     while True:
         print("""\
         ===================
-          APOIAR O CRIADOR
+           :me ajude em:
         ===================
-        1 - Instagram
-        2 - YouTube
-        3 - GitHub
-        99 - Voltar
+        1 - Instagram<3
+        2 - YouTube<3
+        3 - GitHub<3             
+        99 - Voltar#
+        ===================
+             OBRIGADO!
         ===================
         """)
         escolha = input("kamydK-o-suporte--> ").strip()
@@ -147,7 +166,7 @@ def menu():
         print("Para sair, pressione Ctrl + C")
         print("""\
         ==============================
-        MENU DE FERRAMENTAS
+           /__/_\|   MENU   |/_\__\ 
         ==============================
         1 - msfconsole-simples
         2 - Instalar ferramentas
@@ -157,7 +176,7 @@ def menu():
         -o - Opções avançadas
         ==============================
         """)
-        opcao = input("_kamy-toolsdk--> ").strip()
+        opcao = input("_kamydK--> ").strip()
 
         if opcao == '1':
             msfconsole_simples()
