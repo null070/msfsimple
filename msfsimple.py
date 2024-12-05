@@ -3,7 +3,7 @@ import sys
 import webbrowser
 
 def exibir_aviso():
-    input("ATENÇÃO: Não use para fins maliciosos. Eu, como autor, não me responsabilizo. Pressione Enter para continuar.")
+    print("ATENÇÃO: Não use para fins maliciosos. Eu, como autor, não me responsabilizo. Pressione Enter para continuar.")
     input("""
                 ___
               //   \ 
