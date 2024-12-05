@@ -1,7 +1,7 @@
 # msfsimple
 uma maquina que simplifica o metasploit e com mais uma coisas. <br>
 esta em desenvolvimento. <br> <br>
-versao: 1.0.1
+versao: 1.0.9
 
 #instalacao
 
