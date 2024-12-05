@@ -162,7 +162,7 @@ def menu():
     while True:
         os.system("clear")
         print("Feito por Kamy")
-        print('v1.0.1')
+        print('v1.0.9')
         print("Para sair, pressione Ctrl + C")
         print("""\
         ==============================
